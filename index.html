@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ivan Rumiantsev — Разработка сайтов для бизнеса</title>
+    <meta name="description" content="Ivan Rumiantsev — разработка современных сайтов для малого и среднего бизнеса: дорого, аккуратно, адаптивно и с фокусом на заявки." />
+    <style>
+        :root{
+            --bg:#0b1020;
+            --bg-soft:#121933;
+            --card:rgba(255,255,255,.06);
+            --card-border:rgba(255,255,255,.12);
+            --text:#f4f7ff;
+            --muted:#aab4d0;
+            --line:rgba(255,255,255,.08);
+            --accent:#6ea8ff;
+            --accent-2:#8ef0d0;
+            --shadow:0 20px 60px rgba(0,0,0,.35);
+            --radius:24px;
+            --radius-sm:18px;
+            --max:1180px;
+        }
+
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+            margin:0;
+            font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+            color:var(--text);
+            background:
+                    radial-gradient(circle at top left, rgba(110,168,255,.16), transparent 32%),
+                    radial-gradient(circle at 85% 15%, rgba(142,240,208,.10), transparent 24%),
+                    linear-gradient(180deg, #0b1020 0%, #090d18 100%);
+            line-height:1.5;
+            -webkit-font-smoothing:antialiased;
+            text-rendering:optimizeLegibility;
+        }
+
+        img{max-width:100%;display:block}
+        a{text-decoration:none;color:inherit}
+        .container{width:min(calc(100% - 32px),var(--max));margin:0 auto}
+
+        .section{padding:92px 0}
+        .section-title{
+            font-size:clamp(28px,4vw,44px);
+            line-height:1.05;
+            letter-spacing:-.03em;
+            margin:0 0 14px;
+        }
+        .section-text{
+            margin:0;
+            color:var(--muted);
+            max-width:720px;
+            font-size:clamp(15px,2vw,18px);
+        }
+
+        .badge{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            padding:10px 14px;
+            border:1px solid var(--card-border);
+            border-radius:999px;
+            background:rgba(255,255,255,.04);
+            color:#dfe8ff;
+            font-size:13px;
+            line-height:1;
+            backdrop-filter:blur(10px);
+        }
+        .badge::before{
+            content:"";
+            width:8px;height:8px;border-radius:50%;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            box-shadow:0 0 18px rgba(110,168,255,.8);
+        }
+
+        .btn{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            min-height:52px;
+            padding:0 22px;
+            border-radius:999px;
+            font-weight:600;
+            transition:.25s ease;
+            white-space:nowrap;
+        }
+        .btn-primary{
+            color:#08111d;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            box-shadow:0 10px 30px rgba(110,168,255,.22);
+        }
+        .btn-primary:hover{transform:translateY(-2px)}
+        .btn-secondary{
+            color:var(--text);
+            border:1px solid var(--card-border);
+            background:rgba(255,255,255,.04);
+        }
+        .btn-secondary:hover{background:rgba(255,255,255,.08)}
+
+        .nav{
+            position:sticky;
+            top:0;
+            z-index:20;
+            backdrop-filter:blur(16px);
+            background:rgba(7,11,20,.55);
+            border-bottom:1px solid rgba(255,255,255,.06);
+        }
+        .nav-inner{
+            min-height:78px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:20px;
+        }
+        .logo{
+            font-weight:800;
+            font-size:18px;
+            letter-spacing:-.04em;
+            display:flex;
+            flex-direction:column;
+            line-height:1.02;
+        }
+        .logo strong{
+            font-size:18px;
+            font-weight:800;
+        }
+        .logo span{
+            font-size:12px;
+            color:var(--muted);
+            font-weight:500;
+            letter-spacing:0;
+            margin-top:3px;
+        }
+        .nav-links{
+            display:flex;
+            align-items:center;
+            gap:22px;
+            color:#d3dbf3;
+            font-size:14px;
+        }
+        .nav-links a{opacity:.86}
+        .nav-links a:hover{opacity:1}
+
+        .hero{
+            padding:72px 0 46px;
+        }
+        .hero-grid{
+            display:grid;
+            grid-template-columns:1.1fr .9fr;
+            gap:34px;
+            align-items:center;
+        }
+        .hero-copy h1{
+            margin:16px 0 18px;
+            font-size:clamp(40px,7vw,76px);
+            line-height:.96;
+            letter-spacing:-.06em;
+            max-width:760px;
+        }
+        .hero-copy p{
+            margin:0 0 28px;
+            color:var(--muted);
+            font-size:clamp(16px,2vw,19px);
+            max-width:650px;
+        }
+        .hero-actions{
+            display:flex;
+            flex-wrap:wrap;
+            gap:14px;
+            margin-bottom:28px;
+        }
+        .hero-metrics{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:14px;
+            max-width:640px;
+        }
+        .metric{
+            padding:18px;
+            border-radius:20px;
+            border:1px solid var(--card-border);
+            background:rgba(255,255,255,.04);
+            box-shadow:var(--shadow);
+        }
+        .metric strong{
+            display:block;
+            font-size:24px;
+            letter-spacing:-.04em;
+            margin-bottom:4px;
+        }
+        .metric span{
+            color:var(--muted);
+            font-size:13px;
+        }
+
+        .visual{
+            position:relative;
+            min-height:520px;
+            border-radius:32px;
+            overflow:hidden;
+            background:
+                    radial-gradient(circle at 20% 20%, rgba(110,168,255,.22), transparent 28%),
+                    radial-gradient(circle at 80% 15%, rgba(142,240,208,.20), transparent 22%),
+                    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+            border:1px solid var(--card-border);
+            box-shadow:var(--shadow);
+        }
+        .visual::before{
+            content:"";
+            position:absolute;inset:0;
+            background:
+                    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size:32px 32px;
+            mask-image:linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.25));
+            pointer-events:none;
+        }
+        .panel{
+            position:absolute;
+            border:1px solid rgba(255,255,255,.14);
+            background:rgba(13,18,36,.72);
+            box-shadow:0 20px 50px rgba(0,0,0,.3);
+            backdrop-filter:blur(12px);
+            border-radius:24px;
+        }
+        .panel-main{
+            inset:72px 36px 92px 36px;
+            padding:20px;
+        }
+        .panel-top{
+            position:absolute;
+            top:24px;
+            left:24px;
+            right:24px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:10px;
+        }
+        .dots{display:flex;gap:8px}
+        .dots i{
+            width:10px;height:10px;border-radius:50%;
+            display:block;background:rgba(255,255,255,.18)
+        }
+        .panel-label{
+            color:#dbe6ff;
+            font-size:13px;
+            padding:7px 10px;
+            border-radius:999px;
+            background:rgba(255,255,255,.06);
+            border:1px solid rgba(255,255,255,.08);
+        }
+        .screen{
+            height:100%;
+            display:grid;
+            grid-template-columns:1.12fr .88fr;
+            gap:16px;
+            padding-top:42px;
+        }
+        .screen-card,.screen-side{
+            border-radius:20px;
+            background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+            border:1px solid rgba(255,255,255,.08);
+            overflow:hidden;
+        }
+        .screen-card{
+            display:flex;
+            flex-direction:column;
+            justify-content:flex-end;
+            padding:22px;
+            position:relative;
+            min-width:0;
+        }
+        .screen-card::before{
+            content:"";
+            position:absolute; inset:-40% auto auto -10%;
+            width:240px;height:240px;border-radius:50%;
+            background:radial-gradient(circle, rgba(110,168,255,.35), transparent 60%);
+            filter:blur(6px);
+        }
+        .screen-card h3{
+            position:relative;
+            margin:0 0 10px;
+            font-size:26px;
+            line-height:1.04;
+            letter-spacing:-.04em;
+            max-width:100%;
+            overflow-wrap:break-word;
+        }
+        .screen-card p{
+            position:relative;
+            margin:0;
+            color:var(--muted);
+            max-width:100%;
+        }
+        .screen-side{
+            padding:22px;
+            display:flex;
+            align-items:stretch;
+            min-width:0;
+        }
+        .side-stat{
+            width:100%;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            height:100%;
+        }
+
+        .side-stat strong{
+            display:block;
+            font-size:26px;
+            line-height:1.02;
+            letter-spacing:-.04em;
+            margin-bottom:12px;
+        }
+
+        .side-stat span{
+            color:var(--muted);
+            font-size:15px;
+            line-height:1.5;
+            max-width:260px;
+        }
+        .grid-3{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+            margin-top:34px;
+        }
+        .card{
+            padding:24px;
+            border-radius:var(--radius);
+            background:var(--card);
+            border:1px solid var(--card-border);
+            box-shadow:var(--shadow);
+        }
+        .card h3{
+            margin:0 0 10px;
+            font-size:22px;
+            letter-spacing:-.03em;
+        }
+        .card p{
+            margin:0;
+            color:var(--muted);
+        }
+
+        .card,
+        .metric,
+        .project,
+        .step,
+        .price-card{
+            transition:
+                transform .35s ease,
+                border-color .35s ease,
+                background .35s ease,
+                box-shadow .35s ease;
+        }
+
+        .card:hover,
+        .metric:hover,
+        .project:hover,
+        .step:hover,
+        .price-card:hover{
+            transform:translateY(-6px);
+            border-color:rgba(255,255,255,.18);
+            background:rgba(255,255,255,.08);
+            box-shadow:0 24px 70px rgba(0,0,0,.42);
+        }
+
+        .service-icon,
+        .adv-icon,
+        .step-num,
+        .price-icon{
+            width:44px;height:44px;
+            display:grid;place-items:center;
+            border-radius:14px;
+            margin-bottom:16px;
+            border:1px solid rgba(255,255,255,.12);
+            background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+            color:#eaf1ff;
+            font-weight:700;
+        }
+
+        .projects{
+            margin-top:36px;
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+        }
+        .project{
+            overflow:hidden;
+            padding:0;
+        }
+        .project-cover{
+            aspect-ratio:16/10;
+            position:relative;
+            border-bottom:1px solid var(--line);
+            background:#0f1730;
+            overflow:hidden;
+        }
+        .project-cover img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+            transition:transform .6s ease;
+        }
+        .project:hover img{
+            transform:scale(1.06);
+        }
+        .project-body{padding:22px}
+        .project-meta{
+            display:inline-flex;
+            align-items:center;
+            padding:8px 12px;
+            border-radius:999px;
+            margin-bottom:14px;
+            font-size:12px;
+            color:#dbe6ff;
+            border:1px solid rgba(255,255,255,.08);
+            background:rgba(255,255,255,.04);
+        }
+        .project h3{
+            margin:0 0 8px;
+            font-size:24px;
+            letter-spacing:-.04em;
+        }
+        .project p{
+            margin:0;
+            color:var(--muted);
+        }
+
+        .prices{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+            margin-top:36px;
+        }
+        .price-card{
+            position:relative;
+            overflow:hidden;
+        }
+        .price-card::before{
+            content:"";
+            position:absolute;
+            inset:auto -40px -60px auto;
+            width:160px;
+            height:160px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(110,168,255,.18), transparent 65%);
+            pointer-events:none;
+        }
+        .price-top{
+            display:flex;
+            align-items:flex-start;
+            justify-content:space-between;
+            gap:16px;
+            margin-bottom:14px;
+        }
+        .price-value{
+            font-size:30px;
+            line-height:1;
+            letter-spacing:-.05em;
+            font-weight:800;
+            white-space:nowrap;
+        }
+        .price-note{
+            margin-top:12px;
+            color:var(--muted);
+            font-size:14px;
+        }
+
+        .steps{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+            margin-top:36px;
+        }
+        .step{
+            position:relative;
+        }
+        .step::after{
+            content:"";
+            position:absolute;
+            top:46px;
+            right:-9px;
+            width:18px;height:1px;
+            background:rgba(255,255,255,.16);
+        }
+        .step:last-child::after{display:none}
+
+.advantages{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-top:36px;
+}
+
+        .cta{
+            position:relative;
+            overflow:hidden;
+            padding:38px;
+            border-radius:32px;
+            border:1px solid var(--card-border);
+            background:
+                    radial-gradient(circle at 10% 10%, rgba(110,168,255,.18), transparent 30%),
+                    radial-gradient(circle at 90% 20%, rgba(142,240,208,.16), transparent 25%),
+                    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+            box-shadow:var(--shadow);
+        }
+        .cta-grid{
+            display:grid;
+            grid-template-columns:1fr auto;
+            gap:20px;
+            align-items:center;
+        }
+        .cta h2{
+            margin:0 0 10px;
+            font-size:clamp(30px,4vw,48px);
+            line-height:1.02;
+            letter-spacing:-.05em;
+        }
+        .cta p{
+            margin:0;
+            color:var(--muted);
+            max-width:720px;
+            font-size:17px;
+        }
+
+        .contacts{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+            margin-top:34px;
+        }
+        .contact-item small{
+            display:block;
+            margin-bottom:8px;
+            color:var(--muted);
+            font-size:13px;
+        }
+        .contact-item a{
+            font-size:22px;
+            letter-spacing:-.03em;
+            word-break:break-word;
+        }
+
+        .footer{
+            padding:26px 0 48px;
+            color:var(--muted);
+            font-size:14px;
+        }
+
+        @media (max-width: 1080px){
+            .hero-grid,
+            .cta-grid{
+                grid-template-columns:1fr;
+            }
+            .projects,
+            .grid-3,
+            .prices,
+            .steps,
+            .contacts{
+                grid-template-columns:1fr 1fr;
+            }
+            .advantages{
+                grid-template-columns:1fr 1fr;
+            }
+            .visual{min-height:460px}
+        }
+
+        @media (max-width: 720px){
+            .nav-inner{
+                min-height:68px;
+                gap:12px;
+                align-items:center;
+            }
+
+            .nav-links{
+                display:none;
+            }
+
+            .hero{
+                padding-top:36px;
+            }
+
+            .section{
+                padding:68px 0;
+            }
+
+            .hero-metrics,
+            .projects,
+            .grid-3,
+            .prices,
+            .steps,
+            .advantages,
+            .contacts{
+                grid-template-columns:1fr;
+            }
+
+            .metric strong{
+                font-size:22px;
+            }
+
+            .visual{
+                min-height:auto;
+                border-radius:24px;
+                padding-bottom:16px;
+            }
+
+            .panel-main{
+                position:relative;
+                inset:auto;
+                padding:14px;
+                margin:16px;
+            }
+
+            .panel-top{
+                position:relative;
+                top:auto;
+                left:auto;
+                right:auto;
+                margin-bottom:12px;
+            }
+
+            .screen{
+                grid-template-columns:1fr;
+                gap:12px;
+                padding-top:0;
+            }
+
+            .screen-card{
+                padding:16px;
+                min-width:0;
+            }
+
+            .screen-card h3{
+                font-size:24px;
+                line-height:1.02;
+                margin:0 0 8px;
+            }
+
+            .screen-card p{
+                font-size:15px;
+                line-height:1.4;
+                max-width:100%;
+            }
+
+            .screen-side{
+                padding:16px;
+                display:flex;
+                align-items:flex-end;
+                min-width:0;
+            }
+
+            .side-stat{
+                justify-content:flex-end;
+            }
+
+            .side-stat strong{
+                font-size:22px;
+            }
+
+            .cta{
+                padding:26px;
+            }
+
+            .contact-item a{
+                font-size:20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="nav">
+    <div class="container nav-inner">
+        <a href="#" class="logo" aria-label="Ivan Rumiantsev">
+            <strong>Ivan Rumiantsev</strong>
+            <span>Разработка сайтов для бизнеса</span>
+        </a>
+        <nav class="nav-links">
+            <a href="#services">Услуги</a>
+            <a href="#projects">Работы</a>
+            <a href="#prices">Цены</a>
+            <a href="#process">Процесс</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+        <a href="https://t.me/platinumbarr" class="btn btn-secondary">Связаться</a>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <div class="badge">Ivan Rumiantsev — Разработка сайтов для бизнеса</div>
+                <h1>Сайты, которые выглядят дорого и помогают получать заявки</h1>
+                <p>
+                    Создаю современные сайты для малого и среднего бизнеса: аккуратная структура,
+                    премиальная визуальная подача, мобильная адаптация и удобные способы связи с клиентом через Telegram.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="https://t.me/platinumbarr" class="btn btn-primary">Написать в Telegram</a>
+                    <a href="#projects" class="btn btn-secondary">Посмотреть работы</a>
+                </div>
+
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <strong>3–7 дней</strong>
+                        <span>на запуск современного одностраничного сайта</span>
+                    </div>
+                    <div class="metric">
+                        <strong>100%</strong>
+                        <span>адаптация под телефон и мессенджеры</span>
+                    </div>
+                    <div class="metric">
+                        <strong>Чисто</strong>
+                        <span>современный личный подход без шаблонности</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual" aria-hidden="true">
+                <div class="panel panel-main">
+                    <div class="panel-top">
+                        <div class="dots"><i></i><i></i><i></i></div>
+                        <div class="panel-label">Ivan Rumiantsev</div>
+                    </div>
+
+                    <div class="screen">
+                        <div class="screen-card">
+                            <div class="badge">Web Developer for Business</div>
+                            <h3>Современные сайты</h3>
+                            <p>Сильная подача, понятная структура и фокус на том, чтобы человек оставил заявку.</p>
+                        </div>
+
+                        <div class="screen-side">
+                            <div class="side-stat">
+                                <strong>+Заявки</strong>
+                                <span>Через формы, кнопку Telegram и понятные CTA-блоки</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Услуги</h2>
+            <p class="section-text">
+                Делаю современные сайты для бизнеса с понятной структурой, сильной визуальной подачей
+                и акцентом на то, чтобы клиенту было легко оставить заявку.
+            </p>
+
+            <div class="grid-3">
+                <article class="card">
+                    <div class="service-icon">01</div>
+                    <h3>Сайт-визитка</h3>
+                    <p>
+                        Одностраничный сайт с сильным первым экраном, логичными блоками,
+                        услугами, преимуществами, кейсами и контактами.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="service-icon">02</div>
+                    <h3>Формы заявок и связь</h3>
+                    <p>
+                        Кнопки связи, Telegram, понятные CTA-блоки и удобные сценарии,
+                        чтобы клиенту было легко обратиться сразу с телефона.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="service-icon">03</div>
+                    <h3>Базовая SEO подготовка</h3>
+                    <p>
+                        Корректная структура, мета-описания, семантически понятный HTML,
+                        хорошая мобильная адаптация и быстрая загрузка.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Примеры работ</h2>
+            <p class="section-text">
+                Примеры того, как может выглядеть сайт для локального бизнеса: дорого, чисто,
+                современно и без перегруженной визуальной подачи.
+            </p>
+
+            <div class="projects">
+                <article class="card project">
+                    <div class="project-cover">
+                        <img src="images/dental.png" alt="Сайт стоматологии">
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta">Стоматология</div>
+                        <h3>Стоматология</h3>
+                        <p>
+                            Спокойная премиальная подача, акцент на доверии, услугах, врачах и быстрой записи через мессенджер.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="card project">
+                    <div class="project-cover">
+                        <img src="images/auto.png" alt="Сайт автосервиса">
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta">Автосервис</div>
+                        <h3>Автосервис</h3>
+                        <p>
+                            Более энергичный интерфейс с акцентом на скорость записи, перечень услуг, преимущества и понятный контакт.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="card project">
+                    <div class="project-cover">
+                        <img src="images/beauty.png" alt="Сайт салона красоты">
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta">Салон красоты</div>
+                        <h3>Салон красоты</h3>
+                        <p>
+                            Лёгкая визуальная подача с ощущением премиального сервиса, где акцент сделан на доверии и эстетике.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="prices" class="section">
+        <div class="container">
+            <h2 class="section-title">Ориентировочные цены</h2>
+            <p class="section-text">
+                Понятный ориентир по стоимости базовых услуг. Финальная цена зависит от объёма,
+                структуры, количества блоков и задач по запуску сайта.
+            </p>
+
+            <div class="prices">
+                <article class="card price-card">
+                    <div class="price-icon">₽</div>
+                    <div class="price-top">
+                        <h3>Сайт-визитка</h3>
+                        <div class="price-value">от 40 000 ₽</div>
+                    </div>
+                    <p>
+                        Одностраничный сайт с продуманной структурой, современным дизайном,
+                        адаптацией под телефон и подачей, которая усиливает доверие к бизнесу.
+                    </p>
+                    <div class="price-note">Подходит для локальных услуг, частных специалистов и малого бизнеса.</div>
+                </article>
+
+                <article class="card price-card">
+                    <div class="price-icon">WA</div>
+                    <div class="price-top">
+                        <h3>Лендинг с формой заявки и Telegram</h3>
+                        <div class="price-value">от 45 000 ₽</div>
+                    </div>
+                    <p>
+                        Лендинг с акцентом на заявки: сильный первый экран, продающая структура,
+                        кнопки связи, Telegram и форма обращения в ключевых точках страницы.
+                    </p>
+                    <div class="price-note">Подходит для рекламы, быстрых запусков и услуг с явным оффером.</div>
+                </article>
+
+                <article class="card price-card">
+                    <div class="price-icon">SEO</div>
+                    <div class="price-top">
+                        <h3>Базовая SEO-подготовка</h3>
+                        <div class="price-value">от 20 000 ₽</div>
+                    </div>
+                    <p>
+                        Базовая SEO-структура: мета-данные, логичные заголовки, чистая разметка,
+                        улучшение читаемости сайта для поисковых систем и корректная мобильная подача.
+                    </p>
+                    <div class="price-note">Подходит как отдельная услуга или как дополнение к разработке сайта.</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="section">
+        <div class="container">
+            <h2 class="section-title">Процесс работы</h2>
+            <p class="section-text">
+                Простой рабочий путь без хаоса: сначала понимание бизнеса, потом структура,
+                затем сборка и запуск сайта.
+            </p>
+
+            <div class="steps">
+                <article class="card step">
+                    <div class="step-num">1</div>
+                    <h3>Анализ бизнеса</h3>
+                    <p>
+                        Сначала понимаю, чем занимается компания, кто клиент и какое действие должен сделать человек на сайте.
+                    </p>
+                </article>
+
+                <article class="card step">
+                    <div class="step-num">2</div>
+                    <h3>Создание структуры</h3>
+                    <p>
+                        Собираю логичный одностраничный сценарий: первый экран, услуги, преимущества, кейсы, цены и контакты.
+                    </p>
+                </article>
+
+                <article class="card step">
+                    <div class="step-num">3</div>
+                    <h3>Запуск сайта</h3>
+                    <p>
+                        Верстаю, адаптирую под телефон, подключаю кнопки связи и подготавливаю сайт к публикации.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Преимущества</h2>
+            <p class="section-text">
+                Сайт должен не просто существовать, а создавать правильное впечатление о бизнесе
+                и удобно работать для клиента с любого устройства.
+            </p>
+
+            <div class="advantages">
+                <article class="card">
+                    <div class="adv-icon">⚡</div>
+                    <h3>Быстрый запуск</h3>
+                    <p>Оптимальный объём, ясная структура и скорость реализации без лишней перегрузки.</p>
+                </article>
+
+                <article class="card">
+                    <div class="adv-icon">📱</div>
+                    <h3>Адаптация под телефон</h3>
+                    <p>Корректный интерфейс на мобильных устройствах, где чаще всего и приходят заявки.</p>
+                </article>
+
+                <article class="card">
+                    <div class="adv-icon">✦</div>
+                    <h3>Современный дизайн</h3>
+                    <p>Чистая визуальная система, аккуратные отступы, хороший ритм и премиальное ощущение.</p>
+                </article>
+
+                <article class="card">
+                    <div class="adv-icon">✉</div>
+                    <h3>Удобная связь с клиентом</h3>
+                    <p>Кнопки Telegram, формы и понятные точки контакта в нужных местах страницы.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="cta">
+                <div class="cta-grid">
+                    <div>
+                        <div class="badge">Ivan Rumiantsev</div>
+                        <h2>Нужен сайт для бизнеса, который выглядит уверенно и работает на заявки?</h2>
+                        <p>
+                            Напишите в Telegram. Обсудим нишу, структуру сайта и соберём аккуратное решение
+                            для вашего бизнеса без визуального шума, студийной безликости и шаблонного ощущения.
+                        </p>
+                    </div>
+                    <a href="https://t.me/platinumbarr" class="btn btn-primary">Написать в Telegram</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="section">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <p class="section-text">
+                Связь напрямую с разработчиком. Быстро обсудим задачу и формат запуска сайта.
+            </p>
+
+            <div class="contacts">
+                <div class="card contact-item">
+                    <small>Телефон</small>
+                    <a href="tel:+79055695456">+7 (905) 569-54-56</a>
+                </div>
+                <div class="card contact-item">
+                    <small>Telegram</small>
+                    <a href="https://t.me/platinumbarr">@platinumbarr</a>
+                </div>
+                <div class="card contact-item">
+                    <small>Email</small>
+                    <a href="mailto:ivannone299659@gmail.com">ivannone299659@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        © 2026 Ivan Rumiantsev — Разработка сайтов для бизнеса
+    </div>
+</footer>
+
+</body>
+</html>
