@@ -88,7 +88,12 @@
             padding:0 22px;
             border-radius:999px;
             font-weight:600;
-            transition:.25s ease;
+            transition:
+                transform .35s ease,
+                border-color .35s ease,
+                background .35s ease,
+                box-shadow .35s ease,
+                color .35s ease;
             white-space:nowrap;
         }
         .btn-primary{
@@ -96,13 +101,22 @@
             background:linear-gradient(135deg,var(--accent),var(--accent-2));
             box-shadow:0 10px 30px rgba(110,168,255,.22);
         }
-        .btn-primary:hover{transform:translateY(-2px)}
+        .btn:hover{
+            transform:translateY(-6px);
+            border-color:rgba(255,255,255,.18);
+            box-shadow:0 24px 70px rgba(0,0,0,.42);
+        }
+        .btn-primary:hover{
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+        }
         .btn-secondary{
             color:var(--text);
             border:1px solid var(--card-border);
             background:rgba(255,255,255,.04);
         }
-        .btn-secondary:hover{background:rgba(255,255,255,.08)}
+        .btn-secondary:hover{
+            background:rgba(255,255,255,.08);
+        }
 
         .nav{
             position:sticky;
@@ -206,11 +220,13 @@
             border-radius:32px;
             overflow:hidden;
             background:
-                    radial-gradient(circle at 20% 20%, rgba(110,168,255,.22), transparent 28%),
-                    radial-gradient(circle at 80% 15%, rgba(142,240,208,.20), transparent 22%),
-                    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+                    radial-gradient(circle at 18% 18%, rgba(110,168,255,.26), transparent 26%),
+                    radial-gradient(circle at 82% 14%, rgba(142,240,208,.22), transparent 22%),
+                    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
             border:1px solid var(--card-border);
-            box-shadow:var(--shadow);
+            box-shadow:
+                    0 30px 80px rgba(0,0,0,.42),
+                    inset 0 1px 0 rgba(255,255,255,.06);
         }
         .visual::before{
             content:"";
@@ -222,12 +238,37 @@
             mask-image:linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.25));
             pointer-events:none;
         }
+        .visual::after{
+            content:"";
+            position:absolute;
+            inset:auto;
+            width:420px;
+            height:420px;
+            left:-80px;
+            bottom:-120px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(110,168,255,.22), transparent 68%);
+            filter:blur(18px);
+            pointer-events:none;
+        }
+        .visual{
+            transition:transform .45s ease, box-shadow .45s ease;
+        }
+        .visual:hover{
+            transform:translateY(-4px);
+            box-shadow:
+                    0 38px 95px rgba(0,0,0,.48),
+                    inset 0 1px 0 rgba(255,255,255,.06);
+        }
         .panel{
             position:absolute;
             border:1px solid rgba(255,255,255,.14);
             background:rgba(13,18,36,.72);
-            box-shadow:0 20px 50px rgba(0,0,0,.3);
-            backdrop-filter:blur(12px);
+            box-shadow:
+                    0 24px 60px rgba(0,0,0,.34),
+                    inset 0 1px 0 rgba(255,255,255,.05);
+            backdrop-filter:blur(14px);
+            -webkit-backdrop-filter:blur(14px);
             border-radius:24px;
         }
         .panel-main{
@@ -265,10 +306,35 @@
             padding-top:42px;
         }
         .screen-card,.screen-side{
+            position:relative;
+            overflow:hidden;
             border-radius:20px;
             background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
             border:1px solid rgba(255,255,255,.08);
-            overflow:hidden;
+            transition:
+                transform .35s ease,
+                border-color .35s ease,
+                box-shadow .35s ease;
+        }
+        .screen-card::after,
+        .screen-side::after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:rgba(255,255,255,.05);
+            opacity:0;
+            transition:opacity .35s ease;
+            pointer-events:none;
+        }
+        .screen-card:hover,
+        .screen-side:hover{
+            transform:translateY(-6px);
+            border-color:rgba(255,255,255,.18);
+            box-shadow:0 24px 70px rgba(0,0,0,.42);
+        }
+        .screen-card:hover::after,
+        .screen-side:hover::after{
+            opacity:1;
         }
         .screen-card{
             display:flex;
@@ -299,6 +365,15 @@
             margin:0;
             color:var(--muted);
             max-width:100%;
+        }
+        .screen-side::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:
+                    linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,0) 38%);
+            opacity:.55;
+            pointer-events:none;
         }
         .screen-side{
             padding:22px;
@@ -558,6 +633,10 @@
             font-size:14px;
         }
 
+        .mobile-call{
+            display:none;
+        }
+
         @media (max-width: 1080px){
             .hero-grid,
             .cta-grid{
@@ -576,7 +655,45 @@
             .visual{min-height:460px}
         }
 
-        @media (max-width: 720px){
+        @media (max-width:720px){
+            .mobile-call{
+                display:block;
+                position:fixed;
+                bottom:16px;
+                left:16px;
+                right:16px;
+                z-index:100;
+                opacity:1;
+                transform:translateY(0);
+                pointer-events:auto;
+                transition:
+                    opacity .3s ease,
+                    transform .3s ease;
+            }
+
+            .mobile-call.is-hidden{
+                opacity:0;
+                transform:translateY(12px);
+                pointer-events:none;
+            }
+
+            .mobile-call a{
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                height:56px;
+                border-radius:999px;
+                font-weight:600;
+                color:#08111d;
+                background:linear-gradient(135deg,var(--accent),var(--accent-2));
+                box-shadow:0 12px 30px rgba(0,0,0,.35);
+                text-decoration:none;
+            }
+
+            body{
+                padding-bottom:90px;
+            }
+
             .nav-inner{
                 min-height:68px;
                 gap:12px;
@@ -698,7 +815,7 @@
 </header>
 
 <main>
-    <section class="hero">
+    <section class="hero" id="hero-section">
         <div class="container hero-grid">
             <div class="hero-copy">
                 <div class="badge">Ivan Rumiantsev — Разработка сайтов для бизнеса</div>
@@ -710,6 +827,7 @@
 
                 <div class="hero-actions">
                     <a href="https://t.me/platinumbarr" class="btn btn-primary">Написать в Telegram</a>
+                    <a href="tel:+79055695456" class="btn btn-secondary" id="hero-call-btn">Позвонить</a>
                     <a href="#projects" class="btn btn-secondary">Посмотреть работы</a>
                 </div>
 
@@ -997,14 +1115,26 @@
                 <div class="card contact-item">
                     <small>Телефон</small>
                     <a href="tel:+79055695456">+7 (905) 569-54-56</a>
+
+                    <div style="margin-top:16px">
+                        <a href="tel:+79055695456" class="btn btn-primary" id="contacts-call-btn">Позвонить</a>
+                    </div>
                 </div>
                 <div class="card contact-item">
                     <small>Telegram</small>
                     <a href="https://t.me/platinumbarr">@platinumbarr</a>
+
+                    <div style="margin-top:16px">
+                        <a href="https://t.me/platinumbarr" class="btn btn-primary">Написать</a>
+                    </div>
                 </div>
                 <div class="card contact-item">
                     <small>Email</small>
                     <a href="mailto:ivannone299659@gmail.com">ivannone299659@gmail.com</a>
+
+                    <div style="margin-top:16px">
+                        <a href="mailto:ivannone299659@gmail.com" class="btn btn-primary">Написать</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1016,6 +1146,46 @@
         © 2026 Ivan Rumiantsev — Разработка сайтов для бизнеса
     </div>
 </footer>
+
+<div class="mobile-call is-hidden" id="mobile-call">
+    <a href="tel:+79055695456">Позвонить</a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const mobileCall = document.getElementById('mobile-call');
+    const heroSection = document.getElementById('hero-section');
+    const contactsSection = document.getElementById('contacts');
+
+    if (!mobileCall || !heroSection || !contactsSection) return;
+
+    function updateMobileCall() {
+        if (window.innerWidth > 720) {
+            mobileCall.classList.add('is-hidden');
+            return;
+        }
+
+        const scrollY = window.scrollY || window.pageYOffset;
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        const contactsTop = contactsSection.offsetTop;
+
+        const showAfterHero = scrollY > (heroBottom - 220);
+        const hideNearContacts = scrollY > (contactsTop - window.innerHeight + 140);
+
+        if (showAfterHero && !hideNearContacts) {
+            mobileCall.classList.remove('is-hidden');
+        } else {
+            mobileCall.classList.add('is-hidden');
+        }
+    }
+
+    updateMobileCall();
+
+    window.addEventListener('scroll', updateMobileCall, { passive: true });
+    window.addEventListener('resize', updateMobileCall);
+    window.addEventListener('load', updateMobileCall);
+});
+</script>
 
 </body>
 </html>
