@@ -517,6 +517,7 @@
             grid-template-columns:repeat(3,1fr);
             gap:18px;
             margin-top:36px;
+            align-items:stretch;
         }
         .price-card{
             position:relative;
@@ -550,6 +551,126 @@
             margin-top:12px;
             color:var(--muted);
             font-size:14px;
+        }
+
+        .product-offer{
+            margin-top:36px;
+            padding:34px;
+            overflow:hidden;
+            position:relative;
+        }
+
+        .product-offer::before{
+            content:"";
+            position:absolute;
+            inset:auto -60px -80px auto;
+            width:240px;
+            height:240px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(110,168,255,.18), transparent 68%);
+            pointer-events:none;
+        }
+
+        .product-offer__content{
+            display:grid;
+            grid-template-columns:1.15fr .85fr;
+            gap:32px;
+            align-items:center;
+            position:relative;
+            z-index:1;
+        }
+
+        .product-offer__eyebrow{
+            display:inline-flex;
+            align-items:center;
+            padding:10px 14px;
+            border-radius:999px;
+            font-size:13px;
+            color:#dbe6ff;
+            border:1px solid rgba(255,255,255,.08);
+            background:rgba(255,255,255,.04);
+            margin-bottom:18px;
+            transition:
+                transform .35s ease,
+                border-color .35s ease,
+                background .35s ease,
+                box-shadow .35s ease;
+        }
+
+        .product-offer__eyebrow:hover{
+            transform:translateY(-4px);
+            border-color:rgba(255,255,255,.18);
+            background:rgba(255,255,255,.08);
+            box-shadow:0 18px 50px rgba(0,0,0,.28);
+        }
+
+        .product-offer__title{
+            margin:0 0 14px;
+            font-size:clamp(34px, 4vw, 56px);
+            line-height:.96;
+            letter-spacing:-.05em;
+        }
+
+        .product-offer__text{
+            margin:0;
+            color:var(--muted);
+            font-size:clamp(16px, 1.5vw, 19px);
+            line-height:1.6;
+            max-width:760px;
+        }
+
+        .product-offer__bullets{
+            display:flex;
+            flex-wrap:wrap;
+            gap:12px;
+            margin-top:24px;
+        }
+
+        .product-offer__bullets span{
+            display:inline-flex;
+            align-items:center;
+            padding:10px 14px;
+            border-radius:999px;
+            font-size:13px;
+            color:#dbe6ff;
+            border:1px solid rgba(255,255,255,.08);
+            background:rgba(255,255,255,.04);
+            transition:
+                transform .35s ease,
+                border-color .35s ease,
+                background .35s ease,
+                box-shadow .35s ease;
+        }
+
+        .product-offer__bullets span:hover{
+            transform:translateY(-4px);
+            border-color:rgba(255,255,255,.18);
+            background:rgba(255,255,255,.08);
+            box-shadow:0 18px 50px rgba(0,0,0,.28);
+        }
+
+        .product-offer__right{
+            display:flex;
+            flex-direction:column;
+            align-items:flex-end;
+            justify-content:center;
+            text-align:right;
+        }
+
+        .product-offer__price{
+            font-size:clamp(46px, 6vw, 84px);
+            line-height:.94;
+            letter-spacing:-.04em;
+            font-weight:700;
+            font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        .product-offer__note{
+            margin-top:14px;
+            color:var(--muted);
+            font-size:16px;
+            line-height:1.5;
+            max-width:280px;
         }
 
         .steps{
@@ -792,6 +913,28 @@
             .contact-item a{
                 font-size:20px;
             }
+
+            .product-offer{
+                padding:24px 20px;
+            }
+
+            .product-offer__content{
+                grid-template-columns:1fr;
+                gap:24px;
+            }
+
+            .product-offer__right{
+                align-items:flex-start;
+                text-align:left;
+            }
+
+            .product-offer__price{
+                font-size:48px;
+            }
+
+            .product-offer__note{
+                max-width:none;
+            }
         }
     </style>
 </head>
@@ -864,7 +1007,7 @@
                         <div class="screen-side">
                             <div class="side-stat">
                                 <strong>+Заявки</strong>
-                                <span>Через формы, кнопку Telegram и понятные CTA-блоки</span>
+                                <span>Через кнопку Telegram и понятные CTA-блоки</span>
                             </div>
                         </div>
                     </div>
@@ -965,51 +1108,38 @@
 
     <section id="prices" class="section">
         <div class="container">
-            <h2 class="section-title">Ориентировочные цены</h2>
+            <h2 class="section-title">Один продукт. Одна цена.</h2>
             <p class="section-text">
-                Понятный ориентир по стоимости базовых услуг. Финальная цена зависит от объёма,
-                структуры, количества блоков и задач по запуску сайта.
+                Вы получаете современный сайт-визитку для бизнеса с полной готовой структурой,
+                сильной подачей, адаптацией под телефон и всеми нужными способами связи.
             </p>
 
-            <div class="prices">
-                <article class="card price-card">
-                    <div class="price-icon">₽</div>
-                    <div class="price-top">
-                        <h3>Сайт-визитка</h3>
-                        <div class="price-value">от 40 000 ₽</div>
-                    </div>
-                    <p>
-                        Одностраничный сайт с продуманной структурой, современным дизайном,
-                        адаптацией под телефон и подачей, которая усиливает доверие к бизнесу.
-                    </p>
-                    <div class="price-note">Подходит для локальных услуг, частных специалистов и малого бизнеса.</div>
-                </article>
+            <div class="product-offer card price-card reveal">
+                <div class="product-offer__content">
+                    <div class="product-offer__left">
+                        <div class="product-offer__eyebrow">Готовый сайт-визитка для бизнеса</div>
 
-                <article class="card price-card">
-                    <div class="price-icon">WA</div>
-                    <div class="price-top">
-                        <h3>Лендинг с формой заявки и Telegram</h3>
-                        <div class="price-value">от 45 000 ₽</div>
-                    </div>
-                    <p>
-                        Лендинг с акцентом на заявки: сильный первый экран, продающая структура,
-                        кнопки связи, Telegram и форма обращения в ключевых точках страницы.
-                    </p>
-                    <div class="price-note">Подходит для рекламы, быстрых запусков и услуг с явным оффером.</div>
-                </article>
+                        <h3 class="product-offer__title">
+                            Всё уже включено
+                        </h3>
 
-                <article class="card price-card">
-                    <div class="price-icon">SEO</div>
-                    <div class="price-top">
-                        <h3>Базовая SEO-подготовка</h3>
-                        <div class="price-value">от 20 000 ₽</div>
+                        <p class="product-offer__text">
+                            Telegram, кнопка «Позвонить», почта, контакты, адаптация под телефон
+                            и полноценный запуск сайта уже входят в стоимость.
+                        </p>
+
+                        <div class="product-offer__bullets">
+                            <span>Фиксированная цена</span>
+                            <span>Без скрытых доплат</span>
+                            <span>Полностью готовый продукт</span>
+                        </div>
                     </div>
-                    <p>
-                        Базовая SEO-структура: мета-данные, логичные заголовки, чистая разметка,
-                        улучшение читаемости сайта для поисковых систем и корректная мобильная подача.
-                    </p>
-                    <div class="price-note">Подходит как отдельная услуга или как дополнение к разработке сайта.</div>
-                </article>
+
+                    <div class="product-offer__right">
+                        <div class="product-offer__price">40 000 ₽</div>
+                        <div class="product-offer__note">Один платёж. Готовый результат.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
